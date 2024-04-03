@@ -2,14 +2,23 @@
 import Image from "next/image";
 import {useEffect} from "react";
 
-const tele = window.Telegram.WebApp
-
 
 export default function Home() {
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+    console.log({tele: window.Telegram})
+    const tele = window.Telegram.WebApp
     tele.ready()
     tele.onEvent('viewportChanged', () => alert('changing'))
+    var search = window.Telegram.WebApp.initData
+    console.log({search})
+    if (!search) return
+    var converted = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) {
+      return key === "" ? value : decodeURIComponent(value)
+    })
+    alert(converted.user)
+    console.log(JSON.parse(converted.user))
   }, []);
 
   return (

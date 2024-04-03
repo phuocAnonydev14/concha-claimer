@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
 import Script from "next/script";
+import Head from "next/head";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -22,9 +22,10 @@ export default function RootLayout(
     <Head>
       <title>Concha claimer</title>
     </Head>
-    <body className={inter.className}>{children}</body>
-
-    <Script src="https://telegram.org/js/telegram-web-app.js"/>
+    <body className={inter.className}>
+    {children}
+    <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
+    </body>
     </html>
   );
 }
